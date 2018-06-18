@@ -42,7 +42,7 @@ import java.util.UUID;
  * how run this app in real device
  * - turn gps on
  * - run your app
- * - run fake gps app (this app emulates the gps and provides fake gps co-ordinates)
+ * - run lockito app (this app emulates the gps and provides fake gps co-ordinates)
  * - start tracking
  * */
 
