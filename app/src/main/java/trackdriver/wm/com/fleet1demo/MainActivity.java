@@ -88,6 +88,12 @@ public class MainActivity extends AppCompatActivity implements
             new LatLng(27.68142, 85.30852),
             new LatLng(27.682720, 85.311437)};
 
+    public LatLng[] locations5 = new LatLng[]{
+            new LatLng(-33.86387, 151.20764),
+            new LatLng(-33.8779, 151.2058),
+            new LatLng(-33.88936, 151.20172),
+            new LatLng(-33.90147, 151.20109)};
+
     Button startLocationTracking, stopLocationTracking;
     TextView textViewGeofenceLogs;
     private GoogleApiClient googleApiClient;
@@ -99,8 +105,8 @@ public class MainActivity extends AppCompatActivity implements
     private LocationRequest locationRequest;
     // Defined in mili seconds.
     // This number in extremely low, and should be used only for debug
-    private final int UPDATE_INTERVAL = 5000;
-    private final int FASTEST_INTERVAL = 4000;
+    private final int UPDATE_INTERVAL = 60000;
+    private final int FASTEST_INTERVAL = 50000;
 
     private BroadcastReceiver mbroadCastReceiver;
     StringBuilder stringBuilder;
