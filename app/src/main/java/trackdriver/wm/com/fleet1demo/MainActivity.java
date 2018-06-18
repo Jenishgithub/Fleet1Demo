@@ -44,7 +44,7 @@ import java.util.UUID;
  * - run your app
  * - run fake gps app (this app emulates the gps and provides fake gps co-ordinates)
  * - start tracking
- * */
+ */
 
 public class MainActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
@@ -67,6 +67,26 @@ public class MainActivity extends AppCompatActivity implements
             new LatLng(27.66994, 85.32041),
             new LatLng(27.66599, 85.32267),
             new LatLng(27.66634, 85.33301)};
+
+
+    public LatLng[] locations2 = new LatLng[]{
+            new LatLng(27.68034, 85.30216),
+            new LatLng(27.67333, 85.30274),
+            new LatLng(27.66168, 85.31725),
+            new LatLng(27.66664, 85.33246),
+            new LatLng(27.67647, 85.34948)};
+
+    public LatLng[] locations3 = new LatLng[]{
+            new LatLng(27.66727, 85.3074),
+            new LatLng(27.66634, 85.30967),
+            new LatLng(27.66468, 85.31406),
+            new LatLng(27.66168, 85.31765)};
+
+    public LatLng[] locations4 = new LatLng[]{
+            new LatLng(27.68471, 85.30282),
+            new LatLng(27.682820, 85.305442),
+            new LatLng(27.68142, 85.30852),
+            new LatLng(27.682720, 85.311437)};
 
     Button startLocationTracking, stopLocationTracking;
     TextView textViewGeofenceLogs;
@@ -102,8 +122,8 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public void onClick(View view) {
                 //create geofence
-                for (int i = 0; i < locations.length; i++) {
-                    createGeofences(locations[i].latitude, locations[i].longitude, ++i);
+                for (int i = 0; i < locations4.length; i++) {
+                    createGeofences(locations4[i].latitude, locations4[i].longitude, ++i);
                 }
                 addGeofences();
             }
