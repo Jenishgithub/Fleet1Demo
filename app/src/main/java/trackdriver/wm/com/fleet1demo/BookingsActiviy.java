@@ -85,13 +85,6 @@ public class BookingsActiviy extends AppCompatActivity implements GoogleApiClien
     private BroadcastReceiver mbroadCastReceiver;
     StringBuilder stringBuilder;
 
-    // Create a Intent send by the notification
-    public static Intent makeNotificationIntent(Context context, String msg) {
-        Intent intent = new Intent(context, BookingsActiviy.class);
-        intent.putExtra(NOTIFICATION_MSG, msg);
-        return intent;
-    }
-
     public LatLng[] location_1 = new LatLng[]{  //load
             new LatLng(27.68471, 85.30282),
             new LatLng(27.682820, 85.305442),
