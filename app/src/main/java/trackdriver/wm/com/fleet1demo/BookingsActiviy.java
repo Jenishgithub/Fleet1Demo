@@ -67,6 +67,8 @@ public class BookingsActiviy extends AppCompatActivity implements GoogleApiClien
     private static final String NOTIFICATION_MSG = "NOTIFICATION MSG";
     private final int REQ_PERMISSION = 999;
 
+    private String geofenceMessage;
+
     TextView textViewGeofenceLogs;
     private GoogleApiClient googleApiClient;
     private List<Geofence> mGeofenceList;
@@ -159,17 +161,19 @@ public class BookingsActiviy extends AppCompatActivity implements GoogleApiClien
 
     private void clearAllLogs() {
         textViewGeofenceLogs.setText("");
+        geofenceMessage = "";
+        stringBuilder = new StringBuilder();
     }
 
     private void initializeBroadCastReceiver() {
         mbroadCastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                String message = "";
+
                 if (intent.getAction().equals(GeofenceTransitionDetails.PACKAGE_NAME)) {
-                    message = intent.getExtras().getString(GeofenceTransitionDetails.GEOFENCE_UPDATE);
+                    geofenceMessage = intent.getExtras().getString(GeofenceTransitionDetails.GEOFENCE_UPDATE);
                     stringBuilder.append("\n");
-                    stringBuilder.append(message);
+                    stringBuilder.append(geofenceMessage);
                     textViewGeofenceLogs.setText(stringBuilder.toString());
                 }
             }
