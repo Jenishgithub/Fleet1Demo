@@ -43,6 +43,14 @@ import java.util.List;
 import trackdriver.wm.com.fleet1demo.adapter.BookingsAdapter;
 import trackdriver.wm.com.fleet1demo.model.Bookings;
 
+/**
+ * how run this app in real device
+ * - turn gps on
+ * - run your app
+ * - run lockito app (this app emulates the gps and provides fake gps co-ordinates)
+ * - start tracking
+ */
+
 public class BookingsActiviy extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener,
