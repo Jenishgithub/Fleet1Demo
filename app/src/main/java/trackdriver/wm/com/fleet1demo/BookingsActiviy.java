@@ -109,9 +109,15 @@ public class BookingsActiviy extends AppCompatActivity implements GoogleApiClien
             new LatLng(27.68451, 85.30307),
             new LatLng(27.6838, 85.30397),
             new LatLng(27.68095, 85.30953),
-            new LatLng(27.68325, 85.31167)
+            new LatLng(27.68325, 85.31167)};
 
-    };
+    private LatLng[] location_4 = new LatLng[]{//circular
+            new LatLng(27.68227, 85.31128),
+            new LatLng(27.68351, 85.31194),
+            new LatLng(27.68366, 85.31265),
+            new LatLng(27.68304, 85.31327),
+            new LatLng(27.68217, 85.31295),
+            new LatLng(27.68127, 85.31228)};
 
 
     @Override
@@ -293,7 +299,7 @@ public class BookingsActiviy extends AppCompatActivity implements GoogleApiClien
     public void createGeofences(double latitude, double longitude, int geofenceNumber) {
         Geofence.Builder builder = new Geofence.Builder();
         builder.setRequestId(String.valueOf(geofenceNumber));
-        builder.setCircularRegion(latitude, longitude, 200);
+        builder.setCircularRegion(latitude, longitude, 200);//might use 100m radius for more accurate results
         builder.setExpirationDuration(Geofence.NEVER_EXPIRE);
         if (geofenceNumber == 0 || geofenceNumber == 1 || geofenceNumber == 2 || geofenceNumber == 3) {
             builder.setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_DWELL
@@ -410,9 +416,13 @@ public class BookingsActiviy extends AppCompatActivity implements GoogleApiClien
         bookings_2.setLatlngs(new ArrayList<>(Arrays.asList(location_2)));
         bookings.add(bookings_2);
         Bookings bookings_3 = new Bookings();
-        bookings_3.setName("Booking2");
+        bookings_3.setName("Booking3");
         bookings_3.setLatlngs(new ArrayList<>(Arrays.asList(location_3)));
         bookings.add(bookings_3);
+        Bookings bookings_4 = new Bookings();
+        bookings_4.setName("Booking4");
+        bookings_4.setLatlngs(new ArrayList<>(Arrays.asList(location_4)));
+        bookings.add(bookings_4);
     }
 
 
