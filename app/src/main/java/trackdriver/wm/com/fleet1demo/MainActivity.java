@@ -18,7 +18,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -36,13 +35,12 @@ import com.google.android.gms.maps.model.Marker;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * how run this app in real device
  * - turn gps on
  * - run your app
- * - run fake gps app (this app emulates the gps and provides fake gps co-ordinates)
+ * - run lockito app (this app emulates the gps and provides fake gps co-ordinates)
  * - start tracking
  */
 
