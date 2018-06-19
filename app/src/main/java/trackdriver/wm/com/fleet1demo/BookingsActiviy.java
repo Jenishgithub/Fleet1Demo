@@ -279,12 +279,23 @@ public class BookingsActiviy extends AppCompatActivity implements GoogleApiClien
      * Create a Geofence list
      */
     public void createGeofences(double latitude, double longitude, int geofenceNumber) {
-        Geofence fence = new Geofence.Builder()
+        /*Geofence fence = new Geofence.Builder()
                 .setRequestId(String.valueOf(geofenceNumber))
                 .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT)
                 .setCircularRegion(latitude, longitude, 200)
                 .setExpirationDuration(Geofence.NEVER_EXPIRE)
-                .build();
+                .build();*/
+        Geofence.Builder builder = new Geofence.Builder();
+        builder.setRequestId(String.valueOf(geofenceNumber));
+        builder.setCircularRegion(latitude, longitude, 200);
+        builder.setExpirationDuration(Geofence.NEVER_EXPIRE);
+        if (geofenceNumber == 1) {
+            builder.setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_DWELL
+                    | Geofence.GEOFENCE_TRANSITION_EXIT);
+            builder.setLoiteringDelay(30000);//30sec dwell time
+        } else
+            builder.setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT);
+        Geofence fence = builder.build();
         mGeofenceList.add(fence);
     }
 
