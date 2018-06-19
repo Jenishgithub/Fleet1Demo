@@ -39,7 +39,8 @@ public class GeofenceTransitionDetails extends IntentService {
         int geoFenceTransition = geofencingEvent.getGeofenceTransition();
         // Check if the transition type is of interest
         if (geoFenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER ||
-                geoFenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT) {
+                geoFenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT ||
+                geoFenceTransition == Geofence.GEOFENCE_TRANSITION_DWELL) {
             // Get the geofence that were triggered
             List<Geofence> triggeringGeofences = geofencingEvent.getTriggeringGeofences();
 
@@ -58,11 +59,13 @@ public class GeofenceTransitionDetails extends IntentService {
             triggeringGeofencesList.add(geofence.getRequestId());
         }
 
-        String status = null;
+        String status;
         if (geoFenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER)
             status = "Entering Geofence";
         else if (geoFenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT)
             status = "Exiting Geofence";
+        else
+            status = "Dwell Geofence";
         return status + TextUtils.join(", ", triggeringGeofencesList);
     }
 

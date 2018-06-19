@@ -105,6 +105,14 @@ public class BookingsActiviy extends AppCompatActivity implements GoogleApiClien
             new LatLng(27.66664, 85.33246),
             new LatLng(27.67647, 85.34948)};
 
+    public LatLng[] location_3 = new LatLng[]{//my route
+            new LatLng(27.68451, 85.30307),
+            new LatLng(27.6838, 85.30397),
+            new LatLng(27.68095, 85.30953),
+            new LatLng(27.68325, 85.31167)
+
+    };
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -283,20 +291,20 @@ public class BookingsActiviy extends AppCompatActivity implements GoogleApiClien
      * Create a Geofence list
      */
     public void createGeofences(double latitude, double longitude, int geofenceNumber) {
-        /*Geofence fence = new Geofence.Builder()
-                .setRequestId(String.valueOf(geofenceNumber))
-                .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT)
-                .setCircularRegion(latitude, longitude, 200)
-                .setExpirationDuration(Geofence.NEVER_EXPIRE)
-                .build();*/
         Geofence.Builder builder = new Geofence.Builder();
         builder.setRequestId(String.valueOf(geofenceNumber));
         builder.setCircularRegion(latitude, longitude, 200);
         builder.setExpirationDuration(Geofence.NEVER_EXPIRE);
-        if (geofenceNumber == 1) {
+        if (geofenceNumber == 0 || geofenceNumber == 1 || geofenceNumber == 2 || geofenceNumber == 3) {
             builder.setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_DWELL
-                    | Geofence.GEOFENCE_TRANSITION_EXIT);
-            builder.setLoiteringDelay(30000);//30sec dwell time
+                    | Geofence.GEOFENCE_TRANSITION_EXIT);//If GEOFENCE_TRANSITION_ENTER is also specified,
+            // this alert will always be sent after the GEOFENCE_TRANSITION_ENTER alert.
+            builder.setLoiteringDelay(15000);//30sec dwell time
+            /*Sets the delay between GEOFENCE_TRANSITION_ENTER and GEOFENCE_TRANSITION_DWELLING in milliseconds.
+            For example, if loitering delay is set to 300000 ms (i.e. 5 minutes) the geofence service
+             will send a GEOFENCE_TRANSITION_DWELL alert roughly 5 minutes after user enters a geofence if the
+              user stays inside the geofence during this period of time. If the user exits from the geofence in
+              this amount of time, GEOFENCE_TRANSITION_DWELL alert won't be sent**/
         } else
             builder.setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT);
         Geofence fence = builder.build();
@@ -401,6 +409,10 @@ public class BookingsActiviy extends AppCompatActivity implements GoogleApiClien
         bookings_2.setName("Booking2");
         bookings_2.setLatlngs(new ArrayList<>(Arrays.asList(location_2)));
         bookings.add(bookings_2);
+        Bookings bookings_3 = new Bookings();
+        bookings_3.setName("Booking2");
+        bookings_3.setLatlngs(new ArrayList<>(Arrays.asList(location_3)));
+        bookings.add(bookings_3);
     }
 
 
