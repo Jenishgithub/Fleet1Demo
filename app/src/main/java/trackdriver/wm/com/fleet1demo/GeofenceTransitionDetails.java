@@ -2,6 +2,7 @@ package trackdriver.wm.com.fleet1demo;
 
 import android.app.IntentService;
 import android.content.Intent;
+import android.location.Location;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -36,6 +37,12 @@ public class GeofenceTransitionDetails extends IntentService {
             return;
         }
 
+        Location triggeredLocation = geofencingEvent.getTriggeringLocation();
+
+        double triggeredLat = triggeredLocation.getLatitude();
+        double triggeredLong = triggeredLocation.getLongitude();
+        Log.d(TAG, "the triggered locations: " + triggeredLat + triggeredLong);
+
         int geoFenceTransition = geofencingEvent.getGeofenceTransition();
         // Check if the transition type is of interest
         if (geoFenceTransition == Geofence.GEOFENCE_TRANSITION_ENTER ||
@@ -43,7 +50,8 @@ public class GeofenceTransitionDetails extends IntentService {
             // Get the geofence that were triggered
             List<Geofence> triggeringGeofences = geofencingEvent.getTriggeringGeofences();
 
-            String geofenceTransitionDetails = getGeofenceTrasitionDetails(geoFenceTransition, triggeringGeofences);
+            String geofenceTransitionDetails = getGeofenceTrasitionDetails(geoFenceTransition, triggeringGeofences,
+                    triggeredLat, triggeredLong);
 
             // Send notification details as a String
             sendNotification(geofenceTransitionDetails);
@@ -51,7 +59,8 @@ public class GeofenceTransitionDetails extends IntentService {
     }
 
 
-    private String getGeofenceTrasitionDetails(int geoFenceTransition, List<Geofence> triggeringGeofences) {
+    private String getGeofenceTrasitionDetails(int geoFenceTransition, List<Geofence> triggeringGeofences,
+                                               double lat, double lon) {
         // get the ID of each geofence triggered
         ArrayList<String> triggeringGeofencesList = new ArrayList<>();
         for (Geofence geofence : triggeringGeofences) {
@@ -63,7 +72,11 @@ public class GeofenceTransitionDetails extends IntentService {
             status = "Entering Geofence";
         else if (geoFenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT)
             status = "Exiting Geofence";
-        return status + TextUtils.join(", ", triggeringGeofencesList);
+//        return status + TextUtils.join(", ", triggeringGeofencesList);
+        StringBuilder builder = new StringBuilder(status);
+        builder.append(TextUtils.join(", ", triggeringGeofencesList));
+        builder.append(" Lat: " + lat + ", Long: " + lon);
+        return builder.toString();
     }
 
     private void sendNotification(String msg) {
