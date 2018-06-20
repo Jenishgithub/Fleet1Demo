@@ -72,7 +72,6 @@ public class GeofenceTransitionDetails extends IntentService {
             status = "Entering Geofence";
         else if (geoFenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT)
             status = "Exiting Geofence";
-//        return status + TextUtils.join(", ", triggeringGeofencesList);
         StringBuilder builder = new StringBuilder(status);
         builder.append(TextUtils.join(", ", triggeringGeofencesList));
         builder.append(" Lat: " + lat + ", Long: " + lon);
